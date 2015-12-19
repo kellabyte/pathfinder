@@ -4,9 +4,9 @@ Pattern library
 # Requirements
 #### Ubuntu
 ```
-sudo apt-get install scons
+sudo apt-get install cmake scons
 ```
 #### Mac OSX
 ```
-brew install scons
+brew install cmake scons
 ```
