@@ -1,5 +1,5 @@
-# Pathway
-Pattern library
+# Pathfinder
+Path routing library
 
 # Requirements
 #### Ubuntu
