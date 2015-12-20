@@ -5,8 +5,8 @@ include("common.cmake")
 # Pathfinder
 # ----------------------------------------
 project(pathfinder C)
-set(CMAKE_BUILD_TYPE RelWithDebInfo)
-#set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE RelWithDebInfo)
+set(CMAKE_BUILD_TYPE Debug)
 
 add_definitions(-std=gnu99)
 #add_definitions(-mavx)
@@ -26,7 +26,7 @@ file(GLOB_RECURSE PATHFINDER_SOURCES
 
 list(SORT PATHFINDER_SOURCES)
 create_source_group("Source Files" "${CMAKE_CURRENT_SOURCE_DIR}/src" ${PATHFINDER_SOURCES})
-include_directories(${CMAKE_SOURCE_DIR}/lib/libuv/include)
+include_directories(${CMAKE_SOURCE_DIR}/lib/libart/src)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_library(pathfinder STATIC ${PATHFINDER_SOURCES})
