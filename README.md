@@ -1,3 +1,4 @@
+<img src="gobots.jpg" alt="Barrage" width="140" height="140">
 # Pathfinder
 Path routing library
 
