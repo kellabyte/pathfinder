@@ -3,36 +3,36 @@
 #include <stdlib.h>
 #include "art.h"
 #include "pathfinder.h"
-#include "pathfinder_context.h"
 
-int pf_create(pathfinder* context)
+struct pathfinder
 {
-    pathfinder_context* context_t = calloc(1, sizeof(pathfinder_context));
+    art_tree tree;
+};
+
+int pf_create(pathfinder** context)
+{
+    pathfinder* context_t = calloc(1, sizeof(pathfinder));
     int rc = art_tree_init(&context_t->tree);
     if (rc != 0)
         return -1;
     
-    context = context_t;
+    *context = context_t;
     return 0;
 }
 
 int pf_set(pathfinder* context, unsigned char* path, int path_length, void* value)
 {
-    pathfinder_context* context_t = (pathfinder_context*)&context;
-    art_insert(&context_t->tree, path, path_length, value);
+    art_insert(&context->tree, path, path_length, value);
     return 0;
 }
 
-int pf_find(pathfinder* context, unsigned char* path, int path_length, void* value)
+int pf_find(pathfinder* context, unsigned char* path, int path_length, void** value)
 {
-    pathfinder_context* context_t = (pathfinder_context*)&context;
-    int* val = art_search(&context_t->tree, path, path_length);
-    printf("%d\n", *val);
+    *value = art_search(&context->tree, path, path_length);
     return 0;
 }
 
 void pf_free(pathfinder* context)
 {
-    pathfinder_context* context_t = (pathfinder_context*)&context;
-    art_tree_destroy(&context_t->tree);
+    art_tree_destroy(&context->tree);
 }

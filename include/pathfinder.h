@@ -26,12 +26,12 @@ extern "C" {
     #define PATHFINDER_CALLING_CONVENTION /* nothing */
 #endif
 
-typedef void* pathfinder;
+typedef struct pathfinder pathfinder;
     
-PATHFINDER_EXTERN int pf_create(pathfinder* context);
+PATHFINDER_EXTERN int pf_create(pathfinder** context);
 PATHFINDER_EXTERN void pf_free(pathfinder* context);
 PATHFINDER_EXTERN int pf_set(pathfinder* context, unsigned char* path, int path_length, void* value);
-PATHFINDER_EXTERN int pf_find(pathfinder* context, unsigned char* path, int path_length, void* value);
+PATHFINDER_EXTERN int pf_find(pathfinder* context, unsigned char* path, int path_length, void** value);
 
 #ifdef __cplusplus
 }
