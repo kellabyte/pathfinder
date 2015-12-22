@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "art.h"
 #include "pathfinder.h"
-#include "pathfinder_context.h"
 
 struct pathfinder
 {
