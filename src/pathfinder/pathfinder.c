@@ -26,8 +26,8 @@ int pf_set(pathfinder* context, unsigned char* path, int path_length, void* valu
 int pf_find(pathfinder* context, unsigned char* path, int path_length, void* value)
 {
     pathfinder_context* context_t = (pathfinder_context*)&context;
-    int* val = (int)art_search(&context_t->tree, path, path_length);
-    printf("%d\n", val);
+    int* val = art_search(&context_t->tree, path, path_length);
+    printf("%d\n", *val);
     return 0;
 }
 
