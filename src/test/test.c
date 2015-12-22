@@ -29,13 +29,16 @@ START_TEST (test_pf_find)
     
     int* expected = malloc(sizeof(int));
     int* actual = malloc(sizeof(int));
-    expected = 42;
+    int foo=42;
+    memcpy(expected, &foo, sizeof(int));
     
     unsigned char* key = calloc(3, sizeof(unsigned char));
     key = "foo";
     
     rc = pf_set(context, key, 3, expected);
     rc = pf_find(context, key, 3, actual);
+
+    printf("FIND-RC=%d\n", rc);
     ck_assert_msg(rc == 0, "rc != 0");
     
     pf_free(context);
