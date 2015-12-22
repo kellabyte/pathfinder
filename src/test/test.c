@@ -6,7 +6,7 @@
 START_TEST (test_pf_create)
 {
     pathfinder* context = NULL;
-    int rc = pf_create(context);
+    int rc = pf_create(&context);
     ck_assert_msg(rc == 0, "rc != 0");
 }
 END_TEST
@@ -14,7 +14,7 @@ END_TEST
 START_TEST (test_pf_free)
 {
     pathfinder* context = NULL;
-    int rc = pf_create(context);
+    int rc = pf_create(&context);    
     ck_assert_msg(rc == 0, "rc != 0");
     
     pf_free(context);
@@ -24,7 +24,7 @@ END_TEST
 START_TEST (test_pf_find)
 {
     pathfinder* context = NULL;
-    int rc = pf_create(context);
+    int rc = pf_create(&context);
     ck_assert_msg(rc == 0, "rc != 0");
     
     int* expected = malloc(sizeof(int));
@@ -36,10 +36,12 @@ START_TEST (test_pf_find)
     key = "foo";
     
     rc = pf_set(context, key, 3, expected);
-    rc = pf_find(context, key, 3, actual);
-
-    printf("FIND-RC=%d\n", rc);
     ck_assert_msg(rc == 0, "rc != 0");
+    
+    rc = pf_find(context, key, 3, &actual);
+    ck_assert_msg(rc == 0, "rc != 0");
+    
+    ck_assert_msg(*actual == *expected, "actual: %d != expected: %d", *actual, *expected);
     
     pf_free(context);
 }
