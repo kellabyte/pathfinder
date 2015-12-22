@@ -1,5 +1,21 @@
 #!/bin/bash
 cwd=$(pwd)
+unamestr=$(uname)
+sudo="sudo"
+
+if [[ "${unamestr}" =~ "CYGWIN" ]] ; then
+  # no need for sudo in a Cygwin environment
+  sudo=""
+fi
+
+scons=$(command -v scons)
+cmake=$(command -v cmake)
+if [[ $scons == "" || $cmake == "" ]]
+then
+  echo "ERROR: scons and cmake not found"
+  echo "Pathfinder requires these programs for compilation"
+  exit
+fi
 
 if [ ! -d "${cwd}/lib" ]; then
   mkdir ${cwd}/lib
@@ -22,7 +38,7 @@ if [ ! -d "$(cwd)/lib/libart" ]; then
   cd ${cwd}/lib/libart/deps/check-0.9.8/
   ./configure
   make
-  sudo make install
+  ${sudo} make install
   cd ${cwd}/lib/libart
   scons
   cd ${cwd}

@@ -16,6 +16,10 @@ sudo apt-get install cmake scons
 xcode-select --install
 brew install cmake scons
 ```
+#### Cygwin
+```
+Install cmake and scons via setup.exe
+```
 ## Building
 ```
 ./make.sh
