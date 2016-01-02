@@ -28,11 +28,24 @@ extern "C" {
 
 typedef struct pathfinder pathfinder;
     
+typedef struct
+{
+    int length;
+    unsigned char* value;
+}pf_string;
+    
+typedef struct
+{
+    pf_string* variables[1024];
+}pf_result;
+    
 PATHFINDER_EXTERN int pf_create(pathfinder** context);
 PATHFINDER_EXTERN void pf_free(pathfinder* context);
 PATHFINDER_EXTERN int pf_set(pathfinder* context, unsigned char* path, int path_length, void* value);
 PATHFINDER_EXTERN int pf_find(pathfinder* context, unsigned char* path, int path_length, void** value);
+PATHFINDER_EXTERN pf_result* pf_match(pathfinder* context, unsigned char* path, int path_length);
 
+    
 #ifdef __cplusplus
 }
 #endif
