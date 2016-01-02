@@ -47,6 +47,32 @@ START_TEST (test_pf_find)
 }
 END_TEST
 
+START_TEST (test_level_1_simple_string_expansion)
+{
+    pathfinder* context = NULL;
+    int rc = pf_create(&context);
+    ck_assert_msg(rc == 0, "rc != 0");
+    
+    int* expected = malloc(sizeof(int));
+    int* actual = malloc(sizeof(int));
+    int foo=42;
+    memcpy(expected, &foo, sizeof(int));
+    
+    unsigned char* route = calloc(18, sizeof(unsigned char));
+    route = "/foo/{var}/{hello}";
+    
+    rc = pf_set(context, route, 18, expected);
+    ck_assert_msg(rc == 0, "rc != 0");
+    
+    rc = pf_find(context, route, 18, &actual);
+    ck_assert_msg(rc == 0, "rc != 0");
+    
+    ck_assert_msg(*actual == *expected, "actual: %d != expected: %d", *actual, *expected);
+    
+    pf_free(context);
+}
+END_TEST
+
 Suite* test_suite(void)
 {
     Suite *s;
@@ -59,6 +85,7 @@ Suite* test_suite(void)
     tcase_add_test(tc_core, test_pf_create);
     tcase_add_test(tc_core, test_pf_free);
     tcase_add_test(tc_core, test_pf_find);
+    tcase_add_test(tc_core, test_level_1_simple_string_expansion);
     suite_add_tcase(s, tc_core);
 
     return s;
